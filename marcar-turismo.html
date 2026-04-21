@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcar Turismo — Kamba Angola</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --vermelho: #C0392B;
+  --vermelho-escuro: #8B1A14;
+  --amarelo: #E8A020;
+  --amarelo-claro: #F5C842;
+  --preto: #0F0C0A;
+  --terra: #3D1F0E;
+  --areia: #F2E8D5;
+  --creme: #FAF5EC;
+  --muted: rgba(242,232,213,0.45);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Libre Baskerville', serif;
+  background: var(--preto);
+  color: var(--areia);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── PADRÃO GEOMÉTRICO ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(232,160,32,0.04) 0px, rgba(232,160,32,0.04) 1px, transparent 1px, transparent 28px),
+    repeating-linear-gradient(-45deg, rgba(192,57,43,0.035) 0px, rgba(192,57,43,0.035) 1px, transparent 1px, transparent 28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── NAVBAR ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+  height: 68px;
+  background: rgba(15,12,10,0.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(232,160,32,0.2);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+}
+.nav-logo .icon {
+  width: 32px; height: 32px;
+  background: var(--vermelho);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.nav-logo .nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--areia);
+}
+.nav-logo .nome span { color: var(--amarelo); }
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--amarelo); }
+.nav-back::before { content: '←'; font-size: 1rem; }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  position: relative;
+  padding: 5rem 5vw 3.5rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 5vw;
+  width: 60px; height: 3px;
+  background: var(--amarelo);
+}
+
+.page-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+.page-eyebrow .dot {
+  width: 8px; height: 8px;
+  background: var(--amarelo);
+  clip-path: polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+}
+.page-eyebrow span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 600;
+}
+
+.page-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.page-hero h1 em { color: var(--amarelo); font-style: italic; }
+.page-hero p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 500px;
+  margin-top: 1rem;
+}
+
+/* ─── STEPS ─── */
+.steps-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 2rem 5vw;
+  border-bottom: 1px solid rgba(242,232,213,0.08);
+  position: relative;
+  z-index: 1;
+  overflow-x: auto;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-shrink: 0;
+}
+.step-num {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(242,232,213,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.step-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.step.active .step-num { background: var(--amarelo); border-color: var(--amarelo); color: var(--preto); }
+.step.active .step-label { color: var(--amarelo); }
+.step.done .step-num { background: var(--vermelho); border-color: var(--vermelho); color: var(--areia); }
+.step.done .step-label { color: rgba(242,232,213,0.65); }
+.step-connector {
+  width: 40px; height: 1px;
+  background: rgba(242,232,213,0.12);
+  margin: 0 0.5rem;
+  flex-shrink: 0;
+}
+
+/* ─── MAIN LAYOUT ─── */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  padding: 3rem 5vw 5rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
+  .sidebar { order: -1; }
+}
+
+/* ─── FORM PANELS ─── */
+.panel {
+  background: rgba(255,253,248,0.03);
+  border: 1px solid rgba(242,232,213,0.1);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  display: none;
+  animation: panelIn 0.35s ease;
+}
+.panel.active { display: block; }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+  padding: 1.4rem 1.8rem;
+  border-bottom: 1px solid rgba(242,232,213,0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255,253,248,0.02);
+}
+.panel-header .ph-num {
+  width: 26px; height: 26px;
+  background: var(--vermelho);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--areia);
+  flex-shrink: 0;
+}
+.panel-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.panel-body { padding: 1.8rem; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.form-grid .full { grid-column: span 2; }
+
+@media (max-width: 520px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid .full { grid-column: span 1; }
+}
+
+.field label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.field label .req { color: var(--amarelo); margin-left: 2px; }
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: rgba(255,253,248,0.04);
+  border: 1px solid rgba(242,232,213,0.15);
+  padding: 0.7rem 0.9rem;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.82rem;
+  color: var(--areia);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--amarelo);
+  background: rgba(232,160,32,0.04);
+}
+.field input::placeholder,
+.field textarea::placeholder { color: rgba(242,232,213,0.2); }
+.field select option { background: #1a1510; color: var(--areia); }
+.field textarea { resize: vertical; min-height: 90px; }
+
+/* Pacotes */
+.pacotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 640px) { .pacotes-grid { grid-template-columns: 1fr; } }
+
+.pacote-card {
+  border: 1px solid rgba(242,232,213,0.12);
+  padding: 1.2rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  text-align: center;
+}
+.pacote-card:hover { border-color: rgba(232,160,32,0.4); }
+.pacote-card.selected {
+  border-color: var(--amarelo);
+  background: rgba(232,160,32,0.07);
+}
+.pacote-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 0.5rem; right: 0.6rem;
+  font-size: 0.7rem;
+  color: var(--amarelo);
+}
+.pacote-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+.pacote-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.pacote-desc {
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.pacote-preco {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--amarelo);
+}
+
+/* Participantes counter */
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.counter button {
+  width: 32px; height: 32px;
+  background: rgba(242,232,213,0.08);
+  border: 1px solid rgba(242,232,213,0.2);
+  color: var(--areia);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+  font-family: monospace;
+}
+.counter button:hover { background: var(--amarelo); border-color: var(--amarelo); color: var(--preto); }
+.counter .val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-width: 30px;
+  text-align: center;
+  color: var(--amarelo);
+}
+.counter .val-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Action buttons */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-next {
+  background: var(--vermelho);
+  color: var(--areia);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: background 0.2s;
+  flex: 1;
+}
+.btn-next:hover { background: var(--vermelho-escuro); }
+
+.btn-back-step {
+  background: transparent;
+  border: 1px solid rgba(242,232,213,0.2);
+  color: var(--muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-back-step:hover { border-color: var(--areia); color: var(--areia); }
+
+.btn-confirm {
+  background: var(--amarelo);
+  color: var(--preto);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background 0.2s, transform 0.2s;
+  flex: 1;
+  font-size: 0.85rem;
+}
+.btn-confirm:hover { background: var(--amarelo-claro); transform: translateY(-2px); }
+
+/* ─── SIDEBAR ─── */
+.sidebar-card {
+  background: rgba(255,253,248,0.03);
+  border: 1px solid rgba(242,232,213,0.1);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  top: 88px;
+}
+
+.sidebar-header {
+  padding: 1.1rem 1.4rem;
+  background: var(--vermelho-escuro);
+  border-bottom: 2px solid var(--amarelo);
+}
+.sidebar-header h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 700;
+}
+
+.sidebar-body { padding: 1.4rem; }
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(242,232,213,0.06);
+  gap: 1rem;
+}
+.summary-row:last-of-type { border-bottom: none; }
+.summary-key {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.summary-val {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.78rem;
+  color: var(--areia);
+  text-align: right;
+}
+.summary-val.highlight { color: var(--amarelo); font-weight: bold; }
+
+.sidebar-note {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background: rgba(232,160,32,0.06);
+  border-left: 2px solid var(--amarelo);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* Destinos populares */
+.destinos-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.destino-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(242,232,213,0.06);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.destino-item:hover .di-name { color: var(--amarelo); }
+.di-dot { width: 6px; height: 6px; background: var(--vermelho); flex-shrink: 0; }
+.di-name {
+  font-size: 0.78rem;
+  transition: color 0.2s;
+  flex: 1;
+}
+.di-prov {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ─── SUCESSO ─── */
+.success-page {
+  display: none;
+  padding: 4rem 5vw;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  animation: panelIn 0.5s ease;
+}
+.success-page.show { display: block; }
+
+.success-hex {
+  width: 80px; height: 80px;
+  background: var(--amarelo);
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 2rem;
+  animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+}
+@keyframes popIn {
+  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+.success-page h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+}
+.success-page h2 em { color: var(--amarelo); font-style: italic; }
+.success-page p {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.ref-box {
+  display: inline-block;
+  background: rgba(232,160,32,0.1);
+  border: 1px solid rgba(232,160,32,0.3);
+  padding: 1rem 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--amarelo);
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+.ref-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.success-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn-home {
+  background: var(--vermelho);
+  color: var(--areia);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: background 0.2s;
+}
+.btn-home:hover { background: var(--vermelho-escuro); }
+
+/* ─── ANGOLA FLAG STRIP ─── */
+.flag-strip {
+  height: 4px;
+  background: linear-gradient(to right, #CC0000 50%, #000000 50%);
+  position: relative;
+}
+.flag-strip::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px; height: 14px;
+  background: var(--amarelo);
+  clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+}
+</style>
+</head>
+<body>
+
+<div class="flag-strip"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav>
+  <a href="angola-turismo.html" class="nav-logo">
+    <div class="icon">✦</div>
+    <div class="nome">Kamba <span>Angola</span></div>
+  </a>
+  <a href="angola-turismo.html" class="nav-back">Voltar ao site</a>
+</nav>
+
+<!-- ═══ CONTEÚDO PRINCIPAL ═══ -->
+<div id="booking-flow">
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">
+      <div class="dot"></div>
+      <span>Reservas Oficiais</span>
+    </div>
+    <h1>Marcar <em>Turismo</em></h1>
+    <p>Preencha o formulário abaixo para registar a sua visita turística em Angola. A confirmação será enviada por email ou SMS.</p>
+  </div>
+
+  <!-- Steps -->
+  <div class="steps-bar">
+    <div class="step active" id="step-ind-1">
+      <div class="step-num">1</div>
+      <div class="step-label">Dados Pessoais</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" id="step-ind-2">
+      <div class="step-num">2</div>
+      <div class="step-label">Destino & Datas</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" id="step-ind-3">
+      <div class="step-num">3</div>
+      <div class="step-label">Pacote</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" id="step-ind-4">
+      <div class="step-num">4</div>
+      <div class="step-label">Confirmação</div>
+    </div>
+  </div>
+
+  <!-- Main + Sidebar -->
+  <div class="main">
+    <div class="form-area">
+
+      <!-- STEP 1: Dados Pessoais -->
+      <div class="panel active" id="step-1">
+        <div class="panel-header">
+          <div class="ph-num">1</div>
+          <h3>Dados Pessoais</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-grid">
+            <div class="field full">
+              <label>Nome Completo <span class="req">*</span></label>
+              <input type="text" id="f-nome" placeholder="Ex: João Manuel Silva">
+            </div>
+            <div class="field">
+              <label>Bilhete de Identidade <span class="req">*</span></label>
+              <input type="text" id="f-bi" placeholder="000000000LA000">
+            </div>
+            <div class="field">
+              <label>Telefone <span class="req">*</span></label>
+              <input type="tel" id="f-tel" placeholder="+244 9xx xxx xxx">
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="f-email" placeholder="email@exemplo.ao">
+            </div>
+            <div class="field">
+              <label>Nacionalidade <span class="req">*</span></label>
+              <select id="f-nac">
+                <option value="">Selecionar…</option>
+                <option>Angolana</option>
+                <option>Portuguesa</option>
+                <option>Brasileira</option>
+                <option>Outra</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Província de Origem</label>
+              <select id="f-provincia">
+                <option value="">Selecionar…</option>
+                <option>Luanda</option><option>Benguela</option><option>Huambo</option>
+                <option>Malanje</option><option>Namibe</option><option>Cabinda</option>
+                <option>Cuando Cubango</option><option>Lunda Norte</option><option>Lunda Sul</option>
+                <option>Uíge</option><option>Zaire</option><option>Cuanza Norte</option>
+                <option>Cuanza Sul</option><option>Bié</option><option>Moxico</option>
+                <option>Huíla</option><option>Cunene</option><option>Bengo</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-next" onclick="nextStep(1)">Continuar →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Destino & Datas -->
+      <div class="panel" id="step-2">
+        <div class="panel-header">
+          <div class="ph-num">2</div>
+          <h3>Destino & Datas</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-grid">
+            <div class="field full">
+              <label>Destino Principal <span class="req">*</span></label>
+              <input type="text" id="f-destino" placeholder="Ex: Quedas de Kalandula, Ilha de Luanda, Deserto do Namibe…">
+            </div>
+            <div class="field">
+              <label>Tipo de Turismo <span class="req">*</span></label>
+              <select id="f-tipo" onchange="updateSummary()">
+                <option value="">Selecionar…</option>
+                <option>Turismo Cultural</option>
+                <option>Ecoturismo / Natureza</option>
+                <option>Turismo de Praia</option>
+                <option>Turismo de Aventura</option>
+                <option>Turismo de Negócios</option>
+                <option>Turismo Gastronómico</option>
+                <option>Turismo Rural</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Duração</label>
+              <select id="f-duracao" onchange="updateSummary()">
+                <option>1–3 dias</option>
+                <option>4–7 dias</option>
+                <option>1–2 semanas</option>
+                <option>Mais de 2 semanas</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Data de Chegada <span class="req">*</span></label>
+              <input type="date" id="f-chegada" onchange="updateSummary()">
+            </div>
+            <div class="field">
+              <label>Data de Partida <span class="req">*</span></label>
+              <input type="date" id="f-partida">
+            </div>
+            <div class="field full">
+              <label>Número de Participantes</label>
+              <div class="counter">
+                <button onclick="changeCount(-1)">−</button>
+                <div>
+                  <div class="val" id="count-val">1</div>
+                </div>
+                <button onclick="changeCount(1)">+</button>
+                <span class="val-label">pessoa(s)</span>
+              </div>
+            </div>
+            <div class="field full">
+              <label>Observações</label>
+              <textarea id="f-obs" placeholder="Necessidades especiais, alojamento preferido, grupo escolar, luna de mel…"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-back-step" onclick="prevStep(2)">← Voltar</button>
+            <button class="btn-next" onclick="nextStep(2)">Continuar →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Pacote -->
+      <div class="panel" id="step-3">
+        <div class="panel-header">
+          <div class="ph-num">3</div>
+          <h3>Escolha o seu Pacote</h3>
+        </div>
+        <div class="panel-body">
+          <div class="pacotes-grid">
+            <div class="pacote-card" onclick="selectPacote(this,'Descoberta','Exploração básica de 1 destino','Incluído: guia local, transporte')">
+              <span class="pacote-icon">🗺️</span>
+              <div class="pacote-nome">Descoberta</div>
+              <div class="pacote-desc">Exploração de 1 destino com guia local incluído.</div>
+              <div class="pacote-preco">Básico — gratuito</div>
+            </div>
+            <div class="pacote-card" onclick="selectPacote(this,'Explorador','Circuito por 2–3 destinos','Inclui: guia, transporte e refeições')">
+              <span class="pacote-icon">🧭</span>
+              <div class="pacote-nome">Explorador</div>
+              <div class="pacote-desc">Circuito por 2–3 destinos com transporte e refeições.</div>
+              <div class="pacote-preco">Popular — consultar</div>
+            </div>
+            <div class="pacote-card" onclick="selectPacote(this,'Kamba Premium','Experiência completa e personalizada','Inclui: tudo + alojamento 5★')">
+              <span class="pacote-icon">✦</span>
+              <div class="pacote-nome">Kamba Premium</div>
+              <div class="pacote-desc">Experiência completa e personalizada com alojamento 5★.</div>
+              <div class="pacote-preco">Premium — sob consulta</div>
+            </div>
+          </div>
+          <div class="form-actions" style="margin-top:2rem">
+            <button class="btn-back-step" onclick="prevStep(3)">← Voltar</button>
+            <button class="btn-next" onclick="nextStep(3)">Continuar →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Confirmação -->
+      <div class="panel" id="step-4">
+        <div class="panel-header">
+          <div class="ph-num">4</div>
+          <h3>Confirmar Registo</h3>
+        </div>
+        <div class="panel-body">
+          <div id="resumo-final" style="margin-bottom:1.5rem;"></div>
+          <p style="font-size:0.72rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">
+            Ao confirmar, concorda com os <a href="#" style="color:var(--amarelo);text-decoration:none;">Termos de Uso</a> e a <a href="#" style="color:var(--amarelo);text-decoration:none;">Política de Privacidade</a> da Kamba Angola. Os seus dados são tratados de forma confidencial.
+          </p>
+          <div class="form-actions">
+            <button class="btn-back-step" onclick="prevStep(4)">← Voltar</button>
+            <button class="btn-confirm" onclick="confirmar()">✦ Confirmar Marcação</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /form-area -->
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-header">
+          <h4>📋 Resumo da Marcação</h4>
+        </div>
+        <div class="sidebar-body">
+          <div class="summary-row"><span class="summary-key">Nome</span><span class="summary-val" id="s-nome">—</span></div>
+          <div class="summary-row"><span class="summary-key">Destino</span><span class="summary-val" id="s-destino">—</span></div>
+          <div class="summary-row"><span class="summary-key">Tipo</span><span class="summary-val" id="s-tipo">—</span></div>
+          <div class="summary-row"><span class="summary-key">Chegada</span><span class="summary-val" id="s-chegada">—</span></div>
+          <div class="summary-row"><span class="summary-key">Duração</span><span class="summary-val" id="s-duracao">—</span></div>
+          <div class="summary-row"><span class="summary-key">Pacote</span><span class="summary-val highlight" id="s-pacote">—</span></div>
+          <div class="summary-row"><span class="summary-key">Pessoas</span><span class="summary-val" id="s-pessoas">1</span></div>
+          <div class="sidebar-note">
+            🇦🇴 A Kamba Angola garante uma experiência 100% autêntica. Qualquer dúvida contacte-nos pelo <strong>+244 900 000 000</strong>.
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-header">
+          <h4>📍 Destinos Populares</h4>
+        </div>
+        <div class="sidebar-body">
+          <div class="destinos-list">
+            <div class="destino-item" onclick="setDestino('Quedas de Kalandula')">
+              <div class="di-dot"></div><span class="di-name">Quedas de Kalandula</span><span class="di-prov">Malanje</span>
+            </div>
+            <div class="destino-item" onclick="setDestino('Ilha de Luanda')">
+              <div class="di-dot"></div><span class="di-name">Ilha de Luanda</span><span class="di-prov">Luanda</span>
+            </div>
+            <div class="destino-item" onclick="setDestino('Deserto do Namibe')">
+              <div class="di-dot"></div><span class="di-name">Deserto do Namibe</span><span class="di-prov">Namibe</span>
+            </div>
+            <div class="destino-item" onclick="setDestino('Parque Nacional do Kissama')">
+              <div class="di-dot"></div><span class="di-name">Parque do Kissama</span><span class="di-prov">Bengo</span>
+            </div>
+            <div class="destino-item" onclick="setDestino('Planalto Central do Huambo')">
+              <div class="di-dot"></div><span class="di-name">Planalto Central</span><span class="di-prov">Huambo</span>
+            </div>
+            <div class="destino-item" onclick="setDestino('Cabo Ledo')">
+              <div class="di-dot"></div><span class="di-name">Cabo Ledo</span><span class="di-prov">Bengo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /booking-flow -->
+
+<!-- ═══ SUCESSO ═══ -->
+<div class="success-page" id="sucesso">
+  <div class="success-hex">✦</div>
+  <h2>Marcação <em>Confirmada!</em></h2>
+  <p>O seu registo turístico foi submetido com sucesso. Em breve receberá uma confirmação por email ou SMS com todos os detalhes da sua viagem.</p>
+  <div class="ref-label">Número de Referência</div>
+  <div class="ref-box" id="ref-code">ANG-000000</div>
+  <p style="font-size:0.75rem;margin-bottom:2rem;">Guarde este número para consultas futuras. Bem-vindo a Angola! 🇦🇴</p>
+  <div class="success-actions">
+    <a href="angola-turismo.html" class="btn-home">← Voltar ao Site</a>
+    <button class="btn-confirm" onclick="window.print()">🖨️ Imprimir</button>
+  </div>
+</div>
+
+<script>
+  let currentStep = 1;
+  let participantes = 1;
+  let pacoteSelecionado = '';
+
+  function nextStep(from) {
+    // Validações básicas
+    if (from === 1) {
+      const nome = document.getElementById('f-nome').value.trim();
+      const bi = document.getElementById('f-bi').value.trim();
+      const tel = document.getElementById('f-tel').value.trim();
+      const nac = document.getElementById('f-nac').value;
+      if (!nome || !bi || !tel || !nac) {
+        alert('Por favor preencha todos os campos obrigatórios (*).');
+        return;
+      }
+      document.getElementById('s-nome').textContent = nome;
+    }
+    if (from === 2) {
+      const destino = document.getElementById('f-destino').value.trim();
+      const tipo = document.getElementById('f-tipo').value;
+      const chegada = document.getElementById('f-chegada').value;
+      if (!destino || !tipo || !chegada) {
+        alert('Por favor preencha o destino, tipo de turismo e data de chegada.');
+        return;
+      }
+      document.getElementById('s-destino').textContent = destino;
+      document.getElementById('s-tipo').textContent = tipo;
+      const d = new Date(chegada);
+      document.getElementById('s-chegada').textContent = d.toLocaleDateString('pt-PT');
+      document.getElementById('s-duracao').textContent = document.getElementById('f-duracao').value;
+      document.getElementById('s-pessoas').textContent = participantes;
+    }
+    if (from === 3 && !pacoteSelecionado) {
+      alert('Por favor selecione um pacote turístico.');
+      return;
+    }
+    if (from === 4) return;
+
+    document.getElementById(`step-${from}`).classList.remove('active');
+    document.getElementById(`step-${from + 1}`).classList.add('active');
+    document.getElementById(`step-ind-${from}`).classList.remove('active');
+    document.getElementById(`step-ind-${from}`).classList.add('done');
+    document.getElementById(`step-ind-${from + 1}`).classList.add('active');
+    currentStep = from + 1;
+
+    if (from + 1 === 4) buildResumo();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevStep(from) {
+    document.getElementById(`step-${from}`).classList.remove('active');
+    document.getElementById(`step-${from - 1}`).classList.add('active');
+    document.getElementById(`step-ind-${from}`).classList.remove('active');
+    document.getElementById(`step-ind-${from - 1}`).classList.remove('done');
+    document.getElementById(`step-ind-${from - 1}`).classList.add('active');
+    currentStep = from - 1;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function changeCount(dir) {
+    participantes = Math.max(1, Math.min(20, participantes + dir));
+    document.getElementById('count-val').textContent = participantes;
+    document.getElementById('s-pessoas').textContent = participantes;
+  }
+
+  function selectPacote(el, nome, desc, inclui) {
+    document.querySelectorAll('.pacote-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    pacoteSelecionado = nome;
+    document.getElementById('s-pacote').textContent = nome;
+  }
+
+  function updateSummary() {
+    const tipo = document.getElementById('f-tipo').value;
+    const duracao = document.getElementById('f-duracao').value;
+    const chegada = document.getElementById('f-chegada').value;
+    if (tipo) document.getElementById('s-tipo').textContent = tipo;
+    if (duracao) document.getElementById('s-duracao').textContent = duracao;
+    if (chegada) {
+      const d = new Date(chegada);
+      document.getElementById('s-chegada').textContent = d.toLocaleDateString('pt-PT');
+    }
+    const destino = document.getElementById('f-destino')?.value?.trim();
+    if (destino) document.getElementById('s-destino').textContent = destino;
+    const nome = document.getElementById('f-nome')?.value?.trim();
+    if (nome) document.getElementById('s-nome').textContent = nome;
+  }
+
+  function setDestino(nome) {
+    const input = document.getElementById('f-destino');
+    if (input) {
+      input.value = nome;
+      document.getElementById('s-destino').textContent = nome;
+    }
+  }
+
+  function buildResumo() {
+    const nome = document.getElementById('f-nome').value;
+    const bi = document.getElementById('f-bi').value;
+    const tel = document.getElementById('f-tel').value;
+    const destino = document.getElementById('f-destino').value;
+    const tipo = document.getElementById('f-tipo').value;
+    const chegada = document.getElementById('f-chegada').value;
+    const partida = document.getElementById('f-partida').value;
+    const duracao = document.getElementById('f-duracao').value;
+    const obs = document.getElementById('f-obs').value;
+
+    const fmt = v => v ? new Date(v).toLocaleDateString('pt-PT') : '—';
+
+    document.getElementById('resumo-final').innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem 2rem;font-size:0.78rem;">
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Nome</span><div style="margin-top:0.2rem">${nome}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">B.I.</span><div style="margin-top:0.2rem">${bi}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Telefone</span><div style="margin-top:0.2rem">${tel}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Destino</span><div style="margin-top:0.2rem;color:var(--amarelo)">${destino}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Tipo</span><div style="margin-top:0.2rem">${tipo}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Pacote</span><div style="margin-top:0.2rem;color:var(--amarelo)">${pacoteSelecionado}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Chegada</span><div style="margin-top:0.2rem">${fmt(chegada)}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Partida</span><div style="margin-top:0.2rem">${partida ? fmt(partida) : '—'}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Duração</span><div style="margin-top:0.2rem">${duracao}</div></div>
+        <div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Pessoas</span><div style="margin-top:0.2rem">${participantes}</div></div>
+        ${obs ? `<div style="grid-column:span 2"><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Obs.</span><div style="margin-top:0.2rem">${obs}</div></div>` : ''}
+      </div>
+    `;
+  }
+
+  function confirmar() {
+    const ref = 'ANG-' + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('ref-code').textContent = ref;
+    document.getElementById('booking-flow').style.display = 'none';
+    document.getElementById('sucesso').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Live update sidebar on typing
+  document.addEventListener('input', updateSummary);
+</script>
+</body>
+</html>

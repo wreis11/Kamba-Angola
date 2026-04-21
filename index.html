@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamba Angola — Turismo & Cultura</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --vermelho: #C0392B;
+  --vermelho-escuro: #8B1A14;
+  --amarelo: #E8A020;
+  --amarelo-claro: #F5C842;
+  --preto: #0F0C0A;
+  --terra: #3D1F0E;
+  --areia: #F2E8D5;
+  --creme: #FAF5EC;
+  --branco: #FFFDF8;
+  --cinza-quente: #7A6858;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Libre Baskerville', serif;
+  background: var(--preto);
+  color: var(--areia);
+  overflow-x: hidden;
+}
+
+/* ─── PADRÃO DE FUNDO KUBA-INSPIRADO ─── */
+.kuba-pattern {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(232,160,32,0.06) 0px, rgba(232,160,32,0.06) 1px, transparent 1px, transparent 20px),
+    repeating-linear-gradient(-45deg, rgba(192,57,43,0.05) 0px, rgba(192,57,43,0.05) 1px, transparent 1px, transparent 20px);
+}
+
+/* ─── NAVBAR ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4vw;
+  height: 70px;
+  background: rgba(15,12,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(232,160,32,0.2);
+  animation: fadeDown 0.6s ease;
+}
+
+@keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+}
+
+.nav-logo .icon {
+  width: 36px; height: 36px;
+  background: var(--vermelho);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.nav-logo .nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--areia);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.nav-logo .nome span { color: var(--amarelo); }
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--amarelo);
+  transition: width 0.25s;
+}
+.nav-links a:hover { color: var(--amarelo); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-marcar {
+  background: var(--amarelo) !important;
+  color: var(--preto) !important;
+  padding: 0.45rem 1.1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  transition: background 0.2s, transform 0.2s !important;
+}
+.nav-marcar:hover { background: var(--amarelo-claro) !important; transform: translateY(-1px); }
+.nav-marcar::after { display: none !important; }
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(242,232,213,0.08);
+  border: 1px solid rgba(242,232,213,0.15);
+  padding: 0.4rem 0.85rem;
+  transition: border-color 0.2s;
+}
+.nav-search:focus-within { border-color: var(--amarelo); }
+
+.nav-search input {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--areia);
+  width: 140px;
+}
+.nav-search input::placeholder { color: rgba(242,232,213,0.35); }
+
+.nav-search button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--amarelo);
+  font-size: 0.9rem;
+  padding: 0;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-search input { width: 90px; }
+}
+
+/* ─── HERO ─── */
+.hero {
+  height: 100vh;
+  min-height: 600px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgba(139,26,20,0.5) 0%, transparent 50%),
+    linear-gradient(to top, rgba(15,12,10,0.95) 0%, rgba(15,12,10,0.4) 40%, transparent 70%),
+    url('https://images.unsplash.com/photo-1547016183-6b72dbc9f0b2?w=1600&q=80&fit=crop') center/cover no-repeat;
+  transform: scale(1.04);
+  animation: heroZoom 14s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.0); }
+}
+
+/* Padrão geométrico africano sobreposto */
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(232,160,32,0.04) 0px, rgba(232,160,32,0.04) 1px, transparent 1px, transparent 80px),
+    repeating-linear-gradient(0deg, rgba(232,160,32,0.04) 0px, rgba(232,160,32,0.04) 1px, transparent 1px, transparent 80px);
+  pointer-events: none;
+}
+
+/* Linha diagonal decorativa */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(175deg, transparent 49%, var(--preto) 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 6vw 8vh;
+  max-width: 800px;
+  animation: heroFade 1s ease 0.3s both;
+}
+
+@keyframes heroFade { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+.hero-eyebrow .line {
+  width: 40px; height: 1px;
+  background: var(--amarelo);
+}
+.hero-eyebrow span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 600;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 .highlight {
+  display: block;
+  color: var(--amarelo);
+  font-style: italic;
+}
+
+.hero-desc {
+  font-size: clamp(0.88rem, 1.5vw, 1.05rem);
+  line-height: 1.8;
+  color: rgba(242,232,213,0.75);
+  max-width: 520px;
+  margin-bottom: 2.2rem;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-primary {
+  background: var(--vermelho);
+  color: var(--areia);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--vermelho-escuro); transform: translateY(-2px); }
+
+.btn-marcar {
+  background: var(--amarelo);
+  color: var(--preto);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background 0.2s, transform 0.2s;
+  animation: pulsar 2.5s ease-in-out infinite;
+}
+.btn-marcar:hover { background: var(--amarelo-claro); transform: translateY(-2px); animation: none; }
+
+@keyframes pulsar {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,160,32,0.5); }
+  50% { box-shadow: 0 0 0 10px rgba(232,160,32,0); }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--areia);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.8rem;
+  border: 1px solid rgba(242,232,213,0.35);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--amarelo); color: var(--amarelo); }
+
+/* Indicadores laterais */
+.hero-aside {
+  position: absolute;
+  right: 4vw;
+  bottom: 14vh;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+}
+.hero-aside .aside-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--amarelo);
+  line-height: 1;
+}
+.hero-aside .aside-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.5);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin-top: 0.3rem;
+}
+.hero-aside .sep { width: 1px; height: 30px; background: rgba(242,232,213,0.2); }
+
+/* ─── SEÇÃO PESQUISA ─── */
+.search-section {
+  background: var(--vermelho-escuro);
+  padding: 2.5rem 6vw;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  border-bottom: 3px solid var(--amarelo);
+  position: relative;
+  z-index: 2;
+}
+
+.search-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.6);
+  white-space: nowrap;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  min-width: 280px;
+  border: 1px solid rgba(242,232,213,0.2);
+  overflow: hidden;
+  background: rgba(0,0,0,0.25);
+}
+.search-bar input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0.85rem 1.2rem;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.9rem;
+  color: var(--areia);
+}
+.search-bar input::placeholder { color: rgba(242,232,213,0.35); }
+.search-bar button {
+  background: var(--amarelo);
+  border: none;
+  padding: 0 1.4rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--preto);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.search-bar button:hover { background: var(--amarelo-claro); }
+
+.search-filters {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.filter-pill {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(242,232,213,0.25);
+  color: rgba(242,232,213,0.65);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: none;
+}
+.filter-pill:hover, .filter-pill.active {
+  background: var(--amarelo);
+  border-color: var(--amarelo);
+  color: var(--preto);
+}
+
+/* ─── SEÇÃO DESTAQUE ─── */
+.section {
+  padding: 6rem 6vw;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+.section-label .bar {
+  width: 35px; height: 3px;
+  background: var(--amarelo);
+}
+.section-label span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 600;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--areia);
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--amarelo);
+}
+
+.ver-todos {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.55);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242,232,213,0.25);
+  padding-bottom: 2px;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+.ver-todos:hover { color: var(--amarelo); border-color: var(--amarelo); }
+
+/* ─── GRID DESTINOS ─── */
+.destinos-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: 320px 280px;
+  gap: 1rem;
+}
+
+.destino-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  group: true;
+}
+
+.destino-card:nth-child(1) {
+  grid-row: span 2;
+}
+
+.destino-card .img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.destino-card:hover .img { transform: scale(1.08); }
+
+.destino-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15,12,10,0.9) 0%, rgba(15,12,10,0.2) 50%, transparent 80%);
+  transition: opacity 0.3s;
+}
+.destino-card:hover .overlay { opacity: 0.85; }
+
+.destino-card .badge {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  background: var(--vermelho);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  color: var(--areia);
+}
+
+.destino-card .info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.5rem;
+  transform: translateY(4px);
+  transition: transform 0.3s;
+}
+.destino-card:hover .info { transform: translateY(0); }
+
+.destino-card .prov {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  margin-bottom: 0.35rem;
+}
+
+.destino-card .nome-local {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+  color: var(--areia);
+}
+
+.destino-card .desc-local {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: rgba(242,232,213,0.7);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.destino-card:hover .desc-local { max-height: 80px; }
+
+.destino-card .arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  margin-top: 0.8rem;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s 0.05s, transform 0.3s 0.05s;
+}
+.destino-card:hover .arrow { opacity: 1; transform: translateX(0); }
+.destino-card .arrow::after { content: '→'; }
+
+@media (max-width: 768px) {
+  .destinos-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .destino-card:nth-child(1) { grid-row: auto; grid-column: span 2; height: 280px; position: relative; }
+  .destino-card { height: 220px; }
+}
+@media (max-width: 480px) {
+  .destinos-grid { grid-template-columns: 1fr; }
+  .destino-card:nth-child(1) { grid-column: span 1; }
+}
+
+/* ─── SEÇÃO CULTURA ─── */
+.cultura-section {
+  background: var(--terra);
+  padding: 6rem 6vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.cultura-section::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 50%;
+  height: 100%;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(232,160,32,0.06) 0, rgba(232,160,32,0.06) 1px, transparent 1px, transparent 16px),
+    repeating-linear-gradient(-45deg, rgba(192,57,43,0.05) 0, rgba(192,57,43,0.05) 1px, transparent 1px, transparent 16px);
+}
+
+.cultura-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.cultura-card {
+  background: rgba(15,12,10,0.4);
+  border: 1px solid rgba(232,160,32,0.15);
+  padding: 2rem 1.5rem;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.cultura-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--amarelo);
+  transition: height 0.4s;
+}
+.cultura-card:hover { border-color: rgba(232,160,32,0.4); transform: translateY(-4px); }
+.cultura-card:hover::before { height: 100%; }
+
+.cultura-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.cultura-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--areia);
+}
+
+.cultura-card p {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: rgba(242,232,213,0.65);
+}
+
+.cultura-card .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  text-decoration: none;
+  margin-top: 1.2rem;
+  transition: gap 0.2s;
+}
+.cultura-card .link:hover { gap: 0.6rem; }
+.cultura-card .link::after { content: '→'; }
+
+@media (max-width: 640px) {
+  .cultura-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── BANNER Angola ─── */
+.banner-angola {
+  position: relative;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.banner-angola .bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(15,12,10,0.95) 40%, rgba(15,12,10,0.5) 80%, transparent),
+    url('https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1200&q=80&fit=crop') right center/cover no-repeat;
+}
+
+.banner-angola .content {
+  position: relative;
+  z-index: 1;
+  padding: 0 6vw;
+  max-width: 600px;
+}
+
+.banner-angola .quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--areia);
+  margin-bottom: 1rem;
+}
+
+.banner-angola .quote span { color: var(--amarelo); }
+
+.banner-angola .attribution {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.5);
+  margin-bottom: 2rem;
+}
+
+/* ─── RODAPÉ ─── */
+footer {
+  background: #080604;
+  border-top: 3px solid var(--vermelho);
+  padding: 4rem 6vw 2rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(242,232,213,0.1);
+}
+
+.footer-brand .logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--areia);
+  margin-bottom: 0.2rem;
+}
+.footer-brand .logo-text span { color: var(--amarelo); }
+
+.footer-brand .tagline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.35);
+  margin-bottom: 1.2rem;
+}
+
+.footer-brand p {
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: rgba(242,232,213,0.5);
+  max-width: 260px;
+}
+
+.footer-col h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.6rem; }
+.footer-col a {
+  font-size: 0.8rem;
+  color: rgba(242,232,213,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--amarelo); }
+
+.footer-socials {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+
+.social-btn {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(242,232,213,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  color: rgba(242,232,213,0.5);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.social-btn:hover {
+  background: var(--vermelho);
+  border-color: var(--vermelho);
+  color: var(--areia);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: rgba(242,232,213,0.3);
+}
+
+.footer-bottom .bandeira {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.3);
+}
+.bandeira .flag { font-size: 1rem; }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── BOTÃO REGISTAR TURISMO ─── */
+.btn-registar {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: var(--amarelo);
+  color: var(--preto);
+  border: none;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.btn-registar:hover {
+  background: var(--amarelo-claro);
+  transform: translateY(-1px);
+}
+.btn-registar .reg-icon { font-size: 0.85rem; }
+
+/* ─── MODAL REGISTAR ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,8,6,0.82);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-box {
+  background: #1a1209;
+  border: 1px solid rgba(232,160,32,0.3);
+  border-top: 3px solid var(--amarelo);
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+.modal-overlay.open .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  background: var(--vermelho-escuro);
+  padding: 1.6rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+}
+.modal-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--amarelo), transparent);
+}
+
+.modal-header-text .eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  margin-bottom: 0.3rem;
+}
+.modal-header-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--areia);
+  line-height: 1.1;
+}
+.modal-header-text h2 em { font-style: italic; color: var(--amarelo-claro); }
+
+.modal-close {
+  background: rgba(242,232,213,0.1);
+  border: 1px solid rgba(242,232,213,0.2);
+  color: rgba(242,232,213,0.6);
+  width: 32px; height: 32px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.modal-close:hover { background: var(--vermelho); border-color: var(--vermelho); color: var(--areia); }
+
+.modal-body {
+  padding: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.2rem;
+  margin-bottom: 1rem;
+}
+.form-grid .full { grid-column: span 2; }
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  background: rgba(242,232,213,0.05);
+  border: 1px solid rgba(242,232,213,0.15);
+  padding: 0.65rem 0.85rem;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.8rem;
+  color: var(--areia);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: rgba(242,232,213,0.25); }
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--amarelo);
+  background: rgba(232,160,32,0.06);
+}
+.form-field select option { background: #1a1209; color: var(--areia); }
+.form-field textarea { resize: vertical; min-height: 80px; }
+
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+}
+.form-divider span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(242,232,213,0.35);
+  white-space: nowrap;
+}
+.form-divider::before, .form-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(242,232,213,0.1);
+}
+
+.modal-footer {
+  padding: 1.2rem 2rem 1.8rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  border-top: 1px solid rgba(242,232,213,0.08);
+}
+
+.btn-submit {
+  flex: 1;
+  background: var(--vermelho);
+  color: var(--areia);
+  border: none;
+  padding: 0.85rem 1.5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: background 0.2s;
+}
+.btn-submit:hover { background: var(--vermelho-escuro); }
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid rgba(242,232,213,0.2);
+  color: rgba(242,232,213,0.5);
+  padding: 0.85rem 1.2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-cancel:hover { border-color: rgba(242,232,213,0.4); color: var(--areia); }
+
+/* Sucesso */
+.modal-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  gap: 1rem;
+}
+.modal-success.show { display: flex; }
+.success-icon {
+  width: 64px; height: 64px;
+  background: var(--amarelo);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+.modal-success h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--areia);
+}
+.modal-success p {
+  font-size: 0.82rem;
+  color: rgba(242,232,213,0.6);
+  line-height: 1.7;
+  max-width: 340px;
+}
+.modal-success .ref {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--amarelo);
+  background: rgba(232,160,32,0.1);
+  border: 1px solid rgba(232,160,32,0.25);
+  padding: 0.5rem 1.2rem;
+}
+
+@media (max-width: 540px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid .full { grid-column: span 1; }
+  .modal-body { padding: 1.2rem; }
+  .modal-footer { padding: 1rem 1.2rem 1.4rem; flex-direction: column; }
+  .btn-submit, .btn-cancel { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="icon">✦</div>
+    <div class="nome">Kamba <span>Angola</span></div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#destinos">Destinos</a></li>
+    <li><a href="#cultura">Cultura</a></li>
+    <li><a href="#">Praias</a></li>
+    <li><a href="#">Gastronomia</a></li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="marcar-turismo.html" class="nav-marcar">✦ Marcar Turismo</a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:0.8rem;">
+    <div class="nav-search">
+      <input type="text" placeholder="Pesquisar destinos…">
+      <button>🔍</button>
+    </div>
+    <button class="btn-registar" onclick="abrirModal()">
+      <span class="reg-icon">✦</span> Registar Turismo
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="line"></div>
+      <span>Bem-vindo a Angola</span>
+    </div>
+    <h1>
+      A Terra da
+      <span class="highlight">Maravilha</span>
+    </h1>
+    <p class="hero-desc">
+      Das Quedas de Kalandula às praias douradas de Luanda, Angola é um destino de beleza selvagem, cultura milenar e povos acolhedores. Explore um país que ainda guarda os segredos de África.
+    </p>
+    <div class="hero-ctas">
+      <a href="#destinos" class="btn-primary">Explorar Destinos</a>
+      <a href="#cultura" class="btn-ghost">Conhecer a Cultura</a>
+      <a href="marcar-turismo.html" class="btn-marcar">📅 Marcar Turismo</a>
+    </div>
+  </div>
+
+  <div class="hero-aside">
+    <div style="text-align:center">
+      <div class="aside-num">18</div>
+      <span class="aside-label" style="writing-mode:horizontal-tb;transform:none;font-family:'Barlow Condensed',sans-serif;font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(242,232,213,0.4);">Províncias</span>
+    </div>
+    <div class="sep"></div>
+    <div style="text-align:center">
+      <div class="aside-num">1,6M</div>
+      <span style="display:block;font-family:'Barlow Condensed',sans-serif;font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(242,232,213,0.4);">km²</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BARRA DE PESQUISA ═══ -->
+<div class="search-section">
+  <span class="search-title">Pesquisar</span>
+  <div class="search-bar">
+    <input type="text" placeholder="Destino, experiência ou actividade…">
+    <button>Buscar</button>
+  </div>
+  <div class="search-filters">
+    <button class="filter-pill active" onclick="togglePill(this)">Todos</button>
+    <button class="filter-pill" onclick="togglePill(this)">Natureza</button>
+    <button class="filter-pill" onclick="togglePill(this)">Praia</button>
+    <button class="filter-pill" onclick="togglePill(this)">Cultura</button>
+    <button class="filter-pill" onclick="togglePill(this)">Aventura</button>
+  </div>
+</div>
+
+<!-- ═══ DESTINOS EM DESTAQUE ═══ -->
+<section class="section" id="destinos">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">
+        <div class="bar"></div>
+        <span>Locais em Destaque</span>
+      </div>
+      <h2 class="section-title">Destinos que <em>encantam</em></h2>
+    </div>
+    <a href="#" class="ver-todos">Ver todos os destinos</a>
+  </div>
+
+  <div class="destinos-grid">
+
+    <!-- Card Grande -->
+    <div class="destino-card reveal">
+      <div class="img" style="background-image: url('https://medicareclub.ao/image/cache/catalog/guia/malange/img_1418-1240x827.jpg')"></div>
+      <div class="overlay"></div>
+      <div class="badge">✦ Destaque</div>
+      <div class="info">
+        <div class="prov">Malanje · Provìncia</div>
+        <div class="nome-local">Quedas de Kalandula</div>
+        <div class="desc-local">Uma das maiores cataratas de África. As águas do rio Lucala despencam 105 metros numa explosão de névoa e cor. Um espetáculo da natureza que nunca se esquece.</div>
+        <span class="arrow">Explorar</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="destino-card reveal">
+      <div class="img" style="background-image: url('https://scontent.flad1-2.fna.fbcdn.net/v/t39.30808-6/581190819_1325351366269832_6993697781495332276_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=13d280&_nc_ohc=PEUERD8BJicQ7kNvwEstk4I&_nc_oc=AdqdMPxargzgHiiz7ShPoabFLlc8Sa4ZtHKJQqD9SUGtms6XNMFasH_evIkHTflToQg&_nc_zt=23&_nc_ht=scontent.flad1-2.fna&_nc_gid=q_C552WTY1Y5oGUFsNyX4w&_nc_ss=7a3a8&oh=00_Af1mzC35dPCjtmGQ8i-EGyHp9z_cMpRUlGPbUZcvfbAKZw&oe=69EDDDDD')"></div>
+      <div class="overlay"></div>
+      <div class="badge">🌊 Praia</div>
+      <div class="info">
+        <div class="prov">Luanda · Capital</div>
+        <div class="nome-local">Ilha de Luanda</div>
+        <div class="desc-local">A famosa ilha com praias de areia branca e vida noturna animada.</div>
+        <span class="arrow">Explorar</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="destino-card reveal">
+      <div class="img" style="background-image: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/9a/6f/dd/parque-nacional-do-quicama.jpg?w=1200&h=-1&s=1')"></div>
+      <div class="overlay"></div>
+      <div class="badge">🦁 Safari</div>
+      <div class="info">
+        <div class="prov">Cuando Cubango</div>
+        <div class="nome-local">Parque Kissama</div>
+        <div class="desc-local">Fauna selvagem em estado puro.</div>
+        <span class="arrow">Explorar</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="destino-card reveal">
+      <div class="img" style="background-image: url('https://images.ecycle.com.br/wp-content/uploads/2024/05/02144040/deserto-do-namibe.jpg')"></div>
+      <div class="overlay"></div>
+      <div class="badge">🏜️ Natureza</div>
+      <div class="info">
+        <div class="prov">Namibe · Deserto</div>
+        <div class="nome-local">Deserto do Namibe</div>
+        <div class="desc-local">Dunas vermelhas e silêncio eterno.</div>
+        <span class="arrow">Explorar</span>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="destino-card reveal">
+      <div class="img" style="background-image: url('https://scontent.flad1-1.fna.fbcdn.net/v/t39.30808-6/658970196_1267728238834775_867969789786514738_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=13d280&_nc_ohc=rpq9uuq1loYQ7kNvwGVvP_d&_nc_oc=AdqBLY1FZZmaFiyqwKpoSgSku9w2TH3MNTRf4fRSVZJaNBKClEpmHgOaCSgnHC0aZ-U&_nc_zt=23&_nc_ht=scontent.flad1-1.fna&_nc_gid=8-KViNDgRzTLuoJuVrFTyw&_nc_ss=7a3a8&oh=00_Af0gq17peOjhe1vkjvFKyKG64K70ct4QE01XnBwF6oOT3Q&oe=69EDC5BB')"></div>
+      <div class="overlay"></div>
+      <div class="badge">🎭 Cultura</div>
+      <div class="info">
+        <div class="prov">Huambo · Serra</div>
+        <div class="nome-local">Planalto Central</div>
+        <div class="desc-local">Paisagens das serras e cultura Ovimbundu.</div>
+        <span class="arrow">Explorar</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ BANNER ═══ -->
+<div class="banner-angola">
+  <div class="bg"></div>
+  <div class="content">
+    <p class="quote">"Angola é a <span>terra da hospitalidade</span>, onde cada estranho se torna irmão."</p>
+    <p class="attribution">— Provérbio Angolano</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="#" class="btn-primary">Planear a sua Viagem</a>
+      <a href="marcar-turismo.html" class="btn-marcar">📅 Marcar Turismo</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CULTURA ═══ -->
+<section class="cultura-section" id="cultura">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">
+        <div class="bar"></div>
+        <span>Explore a Cultura</span>
+      </div>
+      <h2 class="section-title">Três temas para <em>descobrir</em></h2>
+    </div>
+  </div>
+
+  <div class="cultura-grid">
+    <div class="cultura-card reveal">
+      <span class="cultura-icon">🥁</span>
+      <h3>Música & Semba</h3>
+      <p>O Semba, ancestral do Samba brasileiro, nasceu em Angola. Com os Kuduro, Kizomba e a música tradicional dos Ovambo, Angola tem um dos patrimonios musicais mais ricos de África.</p>
+      <a href="#" class="link">Descobrir</a>
+    </div>
+
+    <div class="cultura-card reveal">
+      <span class="cultura-icon">🎨</span>
+      <h3>Arte & Artesanato</h3>
+      <p>As máscaras Cokwe, a escultura Nkisi e os padrões geométricos tecidos pelas mulheres Mbundu são expressões de uma tradição artística que vive há séculos nas mãos dos antepassados.</p>
+      <a href="#" class="link">Descobrir</a>
+    </div>
+
+    <div class="cultura-card reveal">
+      <span class="cultura-icon">🍛</span>
+      <h3>Gastronomia</h3>
+      <p>O Muamba de Galinha, o Calulu de peixe e o Funje são mais do que pratos — são memória colectiva. A cozinha angolana mistura a herança Bantu com influências do oceano e da terra fértil.</p>
+      <a href="#" class="link">Descobrir</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RODAPÉ ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">Kamba <span>Angola</span></div>
+      <div class="tagline">Turismo & Cultura</div>
+      <p>Descobrir Angola é descobrir a alma de África. Somos o seu guia para as experiências mais autênticas do país.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">ig</a>
+        <a href="#" class="social-btn">yt</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Destinos</h4>
+      <ul>
+        <li><a href="#">Luanda</a></li>
+        <li><a href="#">Malanje</a></li>
+        <li><a href="#">Namibe</a></li>
+        <li><a href="#">Huambo</a></li>
+        <li><a href="#">Benguela</a></li>
+        <li><a href="#">Cabinda</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explorar</h4>
+      <ul>
+        <li><a href="#">Praias</a></li>
+        <li><a href="#">Safari & Natureza</a></li>
+        <li><a href="#">Cultura & Arte</a></li>
+        <li><a href="#">Gastronomia</a></li>
+        <li><a href="#">Festivais</a></li>
+        <li><a href="#">Rotas Temáticas</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">📍 Luanda, Angola</a></li>
+        <li><a href="#">📞 +244 900 000 000</a></li>
+        <li><a href="#">✉ info@kambaangola.ao</a></li>
+        <li style="margin-top:1rem"><a href="#">Sobre Nós</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">Termos de Uso</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Kamba Angola — Todos os direitos reservados.</p>
+    <div class="bandeira">
+      <span class="flag">🇦🇴</span>
+      <span>Feito com orgulho em Angola</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ MODAL REGISTAR TURISMO ═══ -->
+<div class="modal-overlay" id="modal-registar">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="eyebrow">🇦🇴 Kamba Angola</div>
+        <h2>Registar <em>Turismo</em></h2>
+      </div>
+      <button class="modal-close" onclick="fecharModal()">✕</button>
+    </div>
+
+    <!-- Formulário -->
+    <div id="form-area">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Nome Completo *</label>
+            <input type="text" id="f-nome" placeholder="Ex: João Manuel Silva">
+          </div>
+          <div class="form-field">
+            <label>Bilhete de Identidade *</label>
+            <input type="text" id="f-bi" placeholder="000000000LA000">
+          </div>
+          <div class="form-field">
+            <label>Telefone *</label>
+            <input type="tel" id="f-tel" placeholder="+244 9xx xxx xxx">
+          </div>
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" id="f-email" placeholder="email@exemplo.ao">
+          </div>
+          <div class="form-field">
+            <label>Província de Origem *</label>
+            <select id="f-provincia">
+              <option value="">Selecionar…</option>
+              <option>Luanda</option>
+              <option>Benguela</option>
+              <option>Huambo</option>
+              <option>Malanje</option>
+              <option>Namibe</option>
+              <option>Cabinda</option>
+              <option>Cuando Cubango</option>
+              <option>Lunda Norte</option>
+              <option>Lunda Sul</option>
+              <option>Uíge</option>
+              <option>Zaire</option>
+              <option>Cuanza Norte</option>
+              <option>Cuanza Sul</option>
+              <option>Bié</option>
+              <option>Moxico</option>
+              <option>Huíla</option>
+              <option>Cunene</option>
+              <option>Bengo</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Tipo de Turismo *</label>
+            <select id="f-tipo">
+              <option value="">Selecionar…</option>
+              <option>Turismo Cultural</option>
+              <option>Ecoturismo / Natureza</option>
+              <option>Turismo de Praia</option>
+              <option>Turismo de Aventura</option>
+              <option>Turismo de Negócios</option>
+              <option>Turismo Gastronómico</option>
+              <option>Turismo Rural</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label>Destino Pretendido *</label>
+            <input type="text" id="f-destino" placeholder="Ex: Quedas de Kalandula, Ilha de Luanda…">
+          </div>
+          <div class="form-field">
+            <label>Data de Chegada *</label>
+            <input type="date" id="f-chegada">
+          </div>
+          <div class="form-field">
+            <label>Data de Partida *</label>
+            <input type="date" id="f-partida">
+          </div>
+          <div class="form-field full">
+            <label>Observações</label>
+            <textarea id="f-obs" placeholder="Necessidades especiais, grupo, alojamento preferido…"></textarea>
+          </div>
+        </div>
+
+        <div class="form-divider"><span>Termos</span></div>
+        <p style="font-size:0.72rem;color:rgba(242,232,213,0.4);line-height:1.7;">
+          Ao submeter este formulário, concorda com os <a href="#" style="color:var(--amarelo);text-decoration:none;">Termos de Uso</a> e a <a href="#" style="color:var(--amarelo);text-decoration:none;">Política de Privacidade</a> da Kamba Angola. Os seus dados serão usados exclusivamente para fins turísticos.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+        <button class="btn-submit" onclick="submeterRegisto()">✦ Confirmar Registo</button>
+      </div>
+    </div>
+
+    <!-- Sucesso -->
+    <div class="modal-success" id="sucesso-area">
+      <div class="success-icon">✦</div>
+      <h3>Registo Confirmado!</h3>
+      <p>O seu registo turístico foi submetido com sucesso. Em breve receberá uma confirmação por email ou SMS.</p>
+      <div class="ref" id="ref-code">REF: ANG-000000</div>
+      <button class="btn-submit" style="margin-top:0.5rem;width:100%;" onclick="fecharModal()">Fechar</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Filter pills
+  function togglePill(el) {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Smooth scroll nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Modal registar
+  function abrirModal() {
+    document.getElementById('modal-registar').classList.add('open');
+    document.getElementById('form-area').style.display = '';
+    document.getElementById('sucesso-area').classList.remove('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharModal() {
+    document.getElementById('modal-registar').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function submeterRegisto() {
+    const nome = document.getElementById('f-nome').value.trim();
+    const bi = document.getElementById('f-bi').value.trim();
+    const tel = document.getElementById('f-tel').value.trim();
+    const provincia = document.getElementById('f-provincia').value;
+    const tipo = document.getElementById('f-tipo').value;
+    const destino = document.getElementById('f-destino').value.trim();
+    const chegada = document.getElementById('f-chegada').value;
+
+    if (!nome || !bi || !tel || !provincia || !tipo || !destino || !chegada) {
+      alert('Por favor, preencha todos os campos obrigatórios (*).');
+      return;
+    }
+
+    const ref = 'ANG-' + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('ref-code').textContent = 'REF: ' + ref;
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('sucesso-area').classList.add('show');
+  }
+
+  // Fechar ao clicar fora
+  document.getElementById('modal-registar').addEventListener('click', function(e) {
+    if (e.target === this) fecharModal();
+  });
+
+  // ESC para fechar
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') fecharModal();
+  });
+</script>
+</body>
+</html>
